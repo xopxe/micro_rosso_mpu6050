@@ -15,7 +15,7 @@
     ],
 
     "dependencies": {
-        "micro_rosso_platformio": "https://github.com/xopxe/micro_rosso_platformio.git#modularization",
+        "micro_rosso_platformio": "https://github.com/xopxe/micro_rosso_platformio.git",
         "adafruit/Adafruit MPU6050": "^2.2.6",
         "adafruit/Adafruit BusIO": "*",
         "adafruit/Adafruit Unified Sensor": "*",
