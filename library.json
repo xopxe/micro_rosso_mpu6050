@@ -1,0 +1,26 @@
+{
+    "name": "micro_rosso_mpu6050",
+    "version": "0.0.1",
+    "description": "MPU6050 module for micro_rosso",
+    "keywords": "ros, microros, robot",
+
+    "authors":
+    [
+      {
+        "name": "Jorge Visca",
+        "email": "jvisca@fing.edu.uy",
+        "url": "https://www.fing.edu.uy/~jvisca/",
+        "maintainer": true
+      }
+    ],
+
+    "dependencies": {
+        "micro_rosso_platformio": "https://github.com/xopxe/micro_rosso_platformio.git#modularization",
+        "adafruit/Adafruit MPU6050": "^2.2.6",
+        "adafruit/Adafruit BusIO": "*",
+        "adafruit/Adafruit Unified Sensor": "*",
+        "SPI": "*"
+      },
+    "frameworks": "arduino",
+    "platforms": "espressif32"
+}
