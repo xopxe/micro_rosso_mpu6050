@@ -18,7 +18,7 @@ Then, in your `main.cpp`:
 
 ```
 ...
-#include "imu_mpu6050.h"
+#include "micro_rosso_mpu6050.h"
 ImuMPU6050 imu;
 ...
 void setup() {
