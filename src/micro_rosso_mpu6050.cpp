@@ -109,7 +109,7 @@ static bool retrieve_temperature()
 
 static void report_cb(int64_t last_call_time)
 {
-  if (retrieve_raw())
+  if (pdescriptor_imu.topic_name != NULL && retrieve_raw())
   {
     micro_rosso::set_timestamp(msg_imu.header.stamp);
     RCNOCHECK(rcl_publish(
@@ -117,7 +117,7 @@ static void report_cb(int64_t last_call_time)
         &msg_imu,
         NULL));
   }
-  if (retrieve_temperature())
+  if (pdescriptor_temperature.topic_name != NULL && retrieve_temperature())
   {
     micro_rosso::set_timestamp(msg_temperature.header.stamp);
     RCNOCHECK(rcl_publish(
@@ -141,19 +141,24 @@ bool ImuMPU6050::setup(TwoWire &wire,
   mpu.setGyroRange(MPU6050_RANGE_DEG);
   mpu.setFilterBandwidth(MPU6050_BAND);
 
-  pdescriptor_imu.qos = QOS_DEFAULT;
-  pdescriptor_imu.type_support =
-      (rosidl_message_type_support_t *)ROSIDL_GET_MSG_TYPE_SUPPORT(
-          sensor_msgs, msg, Imu);
-  pdescriptor_imu.topic_name = topic_raw;
-  micro_rosso::publishers.push_back(&pdescriptor_imu);
+  if (topic_raw != NULL)
+  {
+    pdescriptor_imu.qos = QOS_DEFAULT;
+    pdescriptor_imu.type_support =
+        (rosidl_message_type_support_t *)ROSIDL_GET_MSG_TYPE_SUPPORT(
+            sensor_msgs, msg, Imu);
+    pdescriptor_imu.topic_name = topic_raw;
+    micro_rosso::publishers.push_back(&pdescriptor_imu);
+  }
 
-  pdescriptor_temperature.qos = QOS_DEFAULT;
-  pdescriptor_temperature.type_support = (rosidl_message_type_support_t *)
-      ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Temperature);
-  pdescriptor_temperature.topic_name = topic_temp;
-  micro_rosso::publishers.push_back(&pdescriptor_temperature);
-
+  if (topic_temp != NULL)
+  {
+    pdescriptor_temperature.qos = QOS_DEFAULT;
+    pdescriptor_temperature.type_support = (rosidl_message_type_support_t *)
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Temperature);
+    pdescriptor_temperature.topic_name = topic_temp;
+    micro_rosso::publishers.push_back(&pdescriptor_temperature);
+  }
   timer_report.callbacks.push_back(&report_cb);
 
   D_println("done.");

@@ -1,8 +1,8 @@
 {
     "name": "micro_rosso_mpu6050",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "MPU6050 module for micro_rosso",
-    "keywords": "ros, microros, robot",
+    "keywords": "ros, micro-ros, robot, micro_rosso, mpu6050",
 
     "authors":
     [
