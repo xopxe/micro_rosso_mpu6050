@@ -8,7 +8,7 @@ It provides support for the MPU6050 IMU by publishing ROS2 topics.
 
 First, import the module into your project's `platformio.ini`:
 
-```
+```ini
 lib_deps =
     ...
     https://github.com/xopxe/micro_rosso_mpu6050.git
@@ -16,7 +16,7 @@ lib_deps =
 
 Then, in your `main.cpp`:
 
-```
+```cpp
 ...
 #include "micro_rosso_mpu6050.h"
 ImuMPU6050 imu;
@@ -24,18 +24,18 @@ ImuMPU6050 imu;
 void setup() {
   Wire.begin(I2C_SDA, I2C_SCL); // initialize I2C as needed
   ...
-  !imu.setup(Wire);
+  imu.setup(Wire);
   ...
 }
 ```
 
 The setup method allows passing optional topic names and a different micro_rosso timer to change the publication rate (by default, it uses the 5Hz timer). It is declared as follows:
 
-```
+```h
   static bool setup(TwoWire &wire = Wire,
                     const char *topic_raw = "/imu/raw",
                     const char *topic_temp = "/imu/temperature",
-                    timer_descriptor &timer_report = micro_rosso::timer_report);
+                    timer_descriptor &timer = micro_rosso::timer_report);
 ```
 
 ## Using the module

@@ -130,7 +130,7 @@ static void report_cb(int64_t last_call_time)
 bool ImuMPU6050::setup(TwoWire &wire,
                        const char *topic_raw,
                        const char *topic_temp,
-                       timer_descriptor &timer_report)
+                       timer_descriptor &timer)
 {
   D_print("setup imu_mpu6050... ");
   if (!mpu.begin(MPU6050_I2CADDR_DEFAULT, &wire, 0))
@@ -159,7 +159,7 @@ bool ImuMPU6050::setup(TwoWire &wire,
     pdescriptor_temperature.topic_name = topic_temp;
     micro_rosso::publishers.push_back(&pdescriptor_temperature);
   }
-  timer_report.callbacks.push_back(&report_cb);
+  timer.callbacks.push_back(&report_cb);
 
   D_println("done.");
   return true;

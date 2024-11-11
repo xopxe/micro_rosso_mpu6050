@@ -10,7 +10,7 @@ public:
   static bool setup(TwoWire &wire = Wire,
                     const char *topic_raw = "/imu/raw",
                     const char *topic_temp = "/imu/temperature",
-                    timer_descriptor &timer_report = micro_rosso::timer_report);
+                    timer_descriptor &timer = micro_rosso::timer_report);
 };
 
 #endif // __imu_mpu6050_h
